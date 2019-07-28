@@ -19,30 +19,37 @@ public class UserController {
 
     // Lists the first 10 users by default
     @GetMapping
-    public Page<User> getUsers(
-            @RequestParam(defaultValue = "10", required = false) int limit,
-            @RequestParam(defaultValue = "0", required = false) int page
-        ) {
+    public Page<User> getUsers(@RequestParam(defaultValue = "10", required = false) int limit, @RequestParam(defaultValue = "0", required = false) int page) {
         return userListingService.listUsers(limit, page);
     }
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
+
         return userService.getUserById(id);
     }
 
     @PostMapping
     public User createUser(@RequestBody User user) {
+
         return userService.addUser(user);
     }
 
     @PutMapping("{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+        if(id != null) {
+            return userService.updateUser(id, user);
+        } else {
+            throw new IllegalArgumentException("Could not update user. Missing entity (user) id in URI path.");
+        }
     }
 
     @DeleteMapping("{id}")
     public void deleteUser(@PathVariable Long id) {
-        userService.deleteUserById(id);
+        if(id != null) {
+            userService.deleteUserById(id);
+        } else {
+            throw new IllegalArgumentException("Could not delete user. Missing entity (user) id in URI path");
+        }
     }
 }
