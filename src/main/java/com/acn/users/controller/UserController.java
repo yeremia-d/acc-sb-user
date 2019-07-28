@@ -37,19 +37,11 @@ public class UserController {
 
     @PutMapping("{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        if(id != null) {
-            return userService.updateUser(id, user);
-        } else {
-            throw new IllegalArgumentException("Could not update user. Missing entity (user) id in URI path.");
-        }
+        return userService.updateUser(id, user);
     }
 
     @DeleteMapping("{id}")
     public void deleteUser(@PathVariable Long id) {
-        if(id != null) {
-            userService.deleteUserById(id);
-        } else {
-            throw new IllegalArgumentException("Could not delete user. Missing entity (user) id in URI path");
-        }
+        userService.deleteUserById(id);
     }
 }
