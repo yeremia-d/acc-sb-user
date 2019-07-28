@@ -20,10 +20,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) throws NoSuchElementException {
 
-        Optional<User> retrievedUser = userRepository.findById(id);
-
-        if(retrievedUser.isPresent()) {
-            return retrievedUser.get();
+        if(userRepository.existsById(id)) {
+            return userRepository.findById(id).get();
         } else {
             throw new NoSuchElementException("Could not find item with id " + id + ". Please verify that your parameters are set correctly.");
         }
@@ -52,7 +50,8 @@ public class UserServiceImpl implements UserService {
             if(userPhone     != null) userToUpdate.setPhone(userPhone);
 
             // save the user
-            return userRepository.save(userToUpdate);
+            userRepository.save(userToUpdate);
+            return userToUpdate;
 
         } else {
             throw new EntityNotFoundException("Could not update user. User with id " + id + " does not exist");
