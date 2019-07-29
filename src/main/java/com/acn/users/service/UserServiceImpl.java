@@ -35,27 +35,31 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(Long id, User user) {
         if(userRepository.existsById(id)) {
-            User    userToUpdate    = userRepository.getOne(id);
-            String  userFirstName   = user.getFirstname();
-            String  userLastName    = user.getLastname();
-            String  userAddress     = user.getAddress();
-            String  userEmail       = user.getEmail();
-            String  userPhone       = user.getPhone();
-
-            // update the required fields
-            if(userFirstName != null) userToUpdate.setFirstname(userFirstName);
-            if(userLastName  != null) userToUpdate.setLastname(userLastName);
-            if(userAddress   != null) userToUpdate.setAddress(userAddress);
-            if(userEmail     != null) userToUpdate.setEmail(userEmail);
-            if(userPhone     != null) userToUpdate.setPhone(userPhone);
+            // Update the old user fields with the new fields specified in user
+            User updatedUser = updateUserFields(userRepository.getOne(id), user);
 
             // save the user
-            userRepository.save(userToUpdate);
-            return userToUpdate;
+            return userRepository.save(updatedUser);
 
         } else {
             throw new EntityNotFoundException("Could not update user. User with id " + id + " does not exist");
         }
+    }
+
+    private User updateUserFields(User oldUser, User newUser) {
+        String  userFirstName   = newUser.getFirstname();
+        String  userLastName    = newUser.getLastname();
+        String  userAddress     = newUser.getAddress();
+        String  userEmail       = newUser.getEmail();
+        String  userPhone       = newUser.getPhone();
+
+        if(userFirstName != null) oldUser.setFirstname(userFirstName);
+        if(userLastName  != null) oldUser.setLastname(userLastName);
+        if(userAddress   != null) oldUser.setAddress(userAddress);
+        if(userEmail     != null) oldUser.setEmail(userEmail);
+        if(userPhone     != null) oldUser.setPhone(userPhone);
+
+        return oldUser;
     }
 
     @Override
