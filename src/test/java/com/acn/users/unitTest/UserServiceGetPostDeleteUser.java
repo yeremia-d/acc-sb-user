@@ -16,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceGetPostDeleteUser {
+
     @Mock
     UserRepository userRepository;
 
@@ -26,6 +27,7 @@ public class UserServiceGetPostDeleteUser {
     public void testGetUserById() {
         User user = new User();
         user.setId(1L);
+
         Optional<User> userOptional = Optional.of(user);
 
         Mockito.when(userRepository.findById(1L)).thenReturn(userOptional);
