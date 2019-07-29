@@ -17,27 +17,31 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Lists the first 10 users by default
+    // Get endpoint that gets a list of users
     @GetMapping
     public Page<User> getUsers(@RequestParam(defaultValue = "10", required = false) int limit, @RequestParam(defaultValue = "0", required = false) int page) {
         return userListingService.listUsers(limit, page);
     }
 
+    // Get endpoint that gets a single user with id (in path variable)
     @GetMapping("/{id}")
     public User getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
+    // Posts endpoint for creating new users
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.addUser(user);
     }
 
+    // Put endpoint for updating existing user with id specified in path variable
     @PutMapping("{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
+    // Delete endpoint that deletes user with id as specified in path variable.
     @DeleteMapping("{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);
