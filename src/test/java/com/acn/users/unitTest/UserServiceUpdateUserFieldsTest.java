@@ -13,13 +13,12 @@ import org.mockito.Mock;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
 import org.mockito.junit.MockitoJUnitRunner;
 
-// Testing the update function in the UserService, where only the appropriate fields
-// are updated. If the incoming user object has null fields, only the fields that
-// are not null are updated.
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
+// Testing the update function in the UserService, where only the appropriate fields
+// are updated. If the incoming user object has null fields, only the fields that
+// are not null are updated.
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceUpdateUserFieldsTest {
 
