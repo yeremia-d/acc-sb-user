@@ -91,5 +91,4 @@ public class UserServiceUpdateUserFieldsTest {
 
         Assert.assertTrue(new ReflectionEquals(updatedUser).matches(expectedUser));
     }
-
 }
