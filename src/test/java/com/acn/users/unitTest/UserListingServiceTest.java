@@ -27,7 +27,7 @@ public class UserListingServiceTest {
     @InjectMocks
     UserListingServiceImpl userListingService;
 
-    @Test // Test to see if the correct method is called with the correct parameters
+    @Test // Test to see if the findAll method is called with the correct parameters
     public void testUserListingService() {
 
         Pageable requestPage = PageRequest.of(1,10);
