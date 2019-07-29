@@ -10,7 +10,6 @@ import javax.persistence.Id;
 @Data
 @Entity
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,5 +20,4 @@ public class User {
     private String phone;
     private String address;
     private String email;
-
 }

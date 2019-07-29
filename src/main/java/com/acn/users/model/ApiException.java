@@ -9,5 +9,4 @@ public class ApiException {
     private LocalDateTime timestamp;
     private String message;
     private String debugMessage;
-
 }

@@ -19,8 +19,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Long id) throws NoSuchElementException {
-        if(userRepository.existsById(id)) {
-            return userRepository.findById(id).get();
+        Optional<User> user = userRepository.findById(id);
+        if(user.isPresent()) {
+            return user.get();
         } else {
             throw new NoSuchElementException("Could not find item with id " + id + ". Please verify that your parameters are set correctly.");
         }

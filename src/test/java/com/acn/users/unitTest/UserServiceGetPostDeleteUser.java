@@ -31,7 +31,6 @@ public class UserServiceGetPostDeleteUser {
         Optional<User> userOptional = Optional.of(user);
 
         Mockito.when(userRepository.findById(1L)).thenReturn(userOptional);
-        Mockito.when(userRepository.existsById(1L)).thenReturn(true);
 
         User result = userService.getUserById(1L);
 
