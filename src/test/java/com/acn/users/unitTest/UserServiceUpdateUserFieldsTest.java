@@ -10,10 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.hamcrest.MockitoHamcrest;
 import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
-import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
 
 // Testing the update function for the UserService, where only the appropriate fields
@@ -21,15 +18,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 // are not null are updated.
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Optional;
 
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceUpdateUserFieldsTest {
 
     private static User oldUser;
-    private static String changedValue;
 
     @Mock
     private UserRepository userRepository;
@@ -40,7 +34,6 @@ public class UserServiceUpdateUserFieldsTest {
     @BeforeClass
     public static void initOldUser() {
         oldUser = new User();
-        changedValue = "Changed";
     }
 
     @Before

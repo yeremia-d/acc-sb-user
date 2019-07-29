@@ -2,9 +2,7 @@ package com.acn.users.unitTest;
 
 import com.acn.users.model.User;
 import com.acn.users.repository.UserRepository;
-import com.acn.users.service.UserListingService;
 import com.acn.users.service.UserListingServiceImpl;
-import com.acn.users.service.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
