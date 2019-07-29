@@ -15,6 +15,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 // Testing the update function for the UserService, where only the appropriate fields
 // are updated. If the incoming user object has null fields, only the fields that
 // are not null are updated.
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -193,4 +195,6 @@ public class UserServiceUpdateUserTest {
         assertEquals(oldUser.getEmail(),        result.getEmail());
         assertEquals(oldUser.getPhone(),        result.getPhone());
     }
+
+
 }
