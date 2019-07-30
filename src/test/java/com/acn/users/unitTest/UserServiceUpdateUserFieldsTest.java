@@ -1,5 +1,6 @@
 package com.acn.users.unitTest;
 
+import com.acn.users.model.Address;
 import com.acn.users.model.User;
 import com.acn.users.repository.UserRepository;
 import com.acn.users.service.UserServiceImpl;
@@ -37,12 +38,11 @@ public class UserServiceUpdateUserFieldsTest {
 
     @Before
     public void resetOldUser() {
+        Address address = new Address();
+        address.setMutableFields("125 Anywhere Street", "Ottawa", "ON", "I2D 2J2");
+
         oldUser.setId(1L);
-        oldUser.setFirstname("Scott-O");
-        oldUser.setLastname("Peters-O");
-        oldUser.setAddress("125 Anywhere Street., Ottawa, ON, I2D 2J2");
-        oldUser.setEmail("speters@domain.com");
-        oldUser.setPhone("+1 555-555-5555");
+        oldUser.setMutableFields("Scott-O", "Peters-O", address, "+1 555-555-5555", "speters@domain.com");
     }
 
     @Test
@@ -60,27 +60,22 @@ public class UserServiceUpdateUserFieldsTest {
 
     @Test
     public void testUpdateFields() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        User updatedFields = new User();
-        String updatedFirstName = "Sean-U";
-        String updatedLastName = "Kwan-U";
-        String updatedAddress = "Address-U";
-        String updatedEmail = "Email-U";
-        String updatedPhone = "Phone-U";
 
+        String  updatedFirstName = "Sean-U";
+        String  updatedLastName  = "Kwan-U";
+        Address updatedAddress   = new Address();
+        String  updatedEmail     = "Email-U";
+        String  updatedPhone     = "Phone-U";
+
+        updatedAddress.setMutableFields("Changed-Street", "Changed-City", "Changed-Province", "Changed-PostalCode");
+
+        User updatedFields = new User();
         updatedFields.setId(1L);
-        updatedFields.setFirstname(updatedFirstName);
-        updatedFields.setLastname(updatedLastName);
-        updatedFields.setAddress(updatedAddress);
-        updatedFields.setPhone(updatedPhone);
-        updatedFields.setEmail(updatedEmail);
+        updatedFields.setMutableFields(updatedFirstName, updatedLastName, updatedAddress, updatedPhone, updatedEmail);
 
         User expectedUser = new User();
         expectedUser.setId(1L);
-        expectedUser.setFirstname(updatedFirstName);
-        expectedUser.setLastname(updatedLastName);
-        expectedUser.setAddress(updatedAddress);
-        expectedUser.setPhone(updatedPhone);
-        expectedUser.setEmail(updatedEmail);
+        expectedUser.setMutableFields(updatedFirstName, updatedLastName, updatedAddress, updatedPhone, updatedEmail);
 
         // Test private method via reflection
         Method methodToTest = UserServiceImpl.class.getDeclaredMethod("updateUserFields", User.class, User.class);

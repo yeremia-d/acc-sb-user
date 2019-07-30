@@ -1,5 +1,6 @@
 package com.acn.users.service;
 
+import com.acn.users.model.Address;
 import com.acn.users.model.User;
 import com.acn.users.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
     private User updateUserFields(User oldUser, User newUser) {
         String  userFirstName   = newUser.getFirstname();
         String  userLastName    = newUser.getLastname();
-        String  userAddress     = newUser.getAddress();
+        Address userAddress     = newUser.getAddress();
         String  userEmail       = newUser.getEmail();
         String  userPhone       = newUser.getPhone();
 
@@ -69,6 +70,5 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new EntityNotFoundException("Could not perform delete operation. User with id " + id + " could not be found or doesn't exist.");
         }
-
     }
 }
